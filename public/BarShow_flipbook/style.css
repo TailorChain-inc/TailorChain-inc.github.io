@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  background: #000;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto; /* 스크롤 허용 */
+  display: flex;
+  justify-content: center;
+  align-items: start; /* 상단 정렬 */
+}
+
+.flipbook-wrapper {
+  position: relative;
+  width: auto;
+  height: auto;
+  overflow: visible;
+}
+
+.flipbook {
+  overflow: visible !important;
+  /* width, height 는 JS에서 지정 */
+}
+
+.flipbook .page img,
+.flipbook .hard img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.flipbook .page {
+  background: white;
+}
+
+.flipbook .hard {
+  background: none !important;
+}
