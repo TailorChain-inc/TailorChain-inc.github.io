@@ -1,0 +1,47 @@
+/* 전체 앱 컨테이너 */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 가로 중앙 */
+  justify-content: center; /* 세로 중앙 */
+  text-align: center;
+  background: #f0f4f2;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* 플립북 개별 페이지 스타일 */
+.page {
+  background: white;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 이미지 두 개 나란히 배치 */
+.image-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+/* 이미지 스타일 */
+.image-row img {
+  width: 45%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 텍스트 설명 */
+.page p {
+  font-size: 1rem;
+  max-width: 80%;
+  color: #444;
+  margin-top: 10px;
+}
