@@ -1,0 +1,110 @@
+/* ─── RESET & BASE ─────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Pretendard,
+    sans-serif;
+}
+/* ─── 로고 ─────────────────────────── */
+.logo {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 16vw;
+  max-width: 180px;
+  z-index: 1000;
+  pointer-events: none;
+}
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+/* ─── 전체화면 버튼 ─────────────────── */
+.fs-btn {
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  border: none;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  z-index: 1000;
+  transition: opacity 0.3s;
+}
+.fs-btn.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─── SLIDE WRAPPER ────────────────────────── */
+#slider {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ─── SINGLE SLIDE ─────────────────────────── */
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── CAPTION ──────────────────────────────── */
+figcaption {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+  font-size: 3.5rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: pre-line;
+  animation: captionFade 1.2s ease both;
+}
+figcaption .small {
+  font-size: 2.2rem;
+  font-weight: 400;
+}
+
+@keyframes captionFade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

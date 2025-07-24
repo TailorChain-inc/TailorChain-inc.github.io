@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WILLOW WOOD – INSIGHT SHOW</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- 로고(우측 상단)  -->
+    <!-- <div class="logo">
+      <img src="images/LogoText.svg" alt="Willow Wood Logo" />
+    </div> -->
+
+    <!--  전체화면 버튼(우측 하단)  -->
+    <button class="fs-btn" aria-label="Enter fullscreen">
+      FULL&nbsp;SCREEN
+    </button>
+
+    <main id="slider">
+      <!-- 1 ~ 6 : 제품 컷 -->
+      <figure class="slide active">
+        <img src="images/1.jpg" alt="Willow Wood Spring·Summer Edition" />
+        <figcaption>
+          WILLOW WOOD<br />SPRING·SUMMER EDITION<br /><span class="small"
+            >라벨의 탄생</span
+          >
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="images/2.jpg" alt="Tyvek label texture" />
+        <figcaption>한복의 결을 담은<br />Tyvek 라벨</figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="images/3.jpg" alt="Four seasons colors" />
+        <figcaption>사계절의 빛깔을<br />한 병에</figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="images/4.jpg" alt="Gold foil detail" />
+        <figcaption>은은한 금박이<br />우아함을 깊게</figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="images/5.jpg" alt="Tradition meets modernity" />
+        <figcaption>전통과 현대,<br />같은 결을 입다</figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="images/6.jpg" alt="Coming soon" />
+        <figcaption>
+          진한 포트 케스크<br /><span class="small">Released</span>
+        </figcaption>
+      </figure>
+
+      <!-- 7 ~ 9 : 오크통 숙성 컷 -->
+      <figure class="slide">
+        <img src="images/7.jpg" alt="Pot‑still soju" />
+        <figcaption>구리 증류기로 빚은<br />전통 쌀 소주</figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="images/8.jpg" alt="Barrel warehouse" />
+        <figcaption>15 °C · 습도 65%<br />시간이 빚어내는 깊이</figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="images/9.jpg" alt="Spring & Summer aging" />
+        <figcaption>Spring · Summer Edition<br />기대해 주세요</figcaption>
+      </figure>
+    </main>
+
+    <!-- 로직 -->
+    <script>
+      /* 슬라이드 자동 전환  */
+      const slides = document.querySelectorAll(".slide");
+      let idx = 0,
+        interval = 12000; // 12 s
+      setInterval(() => {
+        slides[idx].classList.remove("active");
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add("active");
+      }, interval);
+
+      /* 전체화면 버튼  */
+      const fsBtn = document.querySelector(".fs-btn");
+      fsBtn.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+      });
+      document.addEventListener("fullscreenchange", () => {
+        fsBtn.classList.toggle("hide", !!document.fullscreenElement);
+      });
+    </script>
+  </body>
+</html>
