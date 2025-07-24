@@ -1,71 +1,101 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
-
+/* ───────── 기본 리셋 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
-
+html,
 body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Pretendard,
+    sans-serif;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ───────── 레이아웃 & 스크롤‑스냅 */
+.slides {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE, Edge */
+}
+.slides::-webkit-scrollbar {
+  display: none;
+} /* 모바일 스크롤바 숨김 */
+
+.slide {
+  flex: 0 0 100%;
   min-height: 100vh;
-  background: #ffffff;
-}
-
-section {
-  perspective: 1200px; /* 3D 원근감을 설정하는 값 */
-}
-
-.book {
+  scroll-snap-align: start;
   position: relative;
-  width: auto;
-  height: 90vh; /* 화면 높이 기준 */
-  aspect-ratio: 3509 / 2480; /* 뒷면 기준 비율로 설정 */
-  transform-style: preserve-3d;
-  transition: transform 0.8s ease;
-  cursor: pointer;
+  animation: fade 0.6s ease both;
 }
 
-.book:active {
-  transform: rotateY(180deg);
+/* ───────── 안내 문구 */
+.hint {
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  color: #fff;
+  text-shadow: 0 0 6px #000;
+  pointer-events: none;
+  animation: bounce 1s ease-in-out infinite alternate;
+  z-index: 1000;
 }
 
-/* 앞면 이미지 */
-.book img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* 이미지가 잘리지 않도록 */
-  backface-visibility: hidden;
-  background: white;
-}
-/* 옆면 이미지 */
-
-.book::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%) rotateY(90deg);
-  transform-origin: left;
-  width: 8px; /* 두께감 있게 조절 가능 (조절해보세요) */
-  height: 100%;
-  background: url(images/line.jpg) center/cover no-repeat;
-  backface-visibility: hidden;
-  z-index: 2;
+/* ───────── 홈 버튼 */
+.home-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.9rem;
+  backdrop-filter: blur(4px);
+  z-index: 1001;
 }
 
-/* 뒷면 이미지 */
-.book::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url(images/pamphlet2.jpg) center/contain no-repeat;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-  background-color: white;
+/* ───────── 데스크톱 & 대화면 : 가로 슬라이드 */
+@media (min-width: 768px) {
+  .slides {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+  }
+  .slide {
+    flex: 0 0 100vw;
+  }
+}
+
+/* ───────── 애니메이션 */
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-0.6rem);
+  }
 }

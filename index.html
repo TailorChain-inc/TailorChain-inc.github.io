@@ -1,16 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 브라우저 줌 허용해서 핀치 확대 가능 -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes"
+    />
+    <title>Pamphlet</title>
     <link rel="stylesheet" href="style.css" />
-    <title>2025 BarShow</title>
   </head>
+
   <body>
-    <section>
-      <div class="book">
-        <img src="images/pamphlet1.jpg" alt="" />
-      </div>
-    </section>
+    <!-- 홈으로 가는 고정 버튼 -->
+    <button
+      class="home-btn"
+      onclick="document.querySelector('#slide1').scrollIntoView({behavior:'smooth'});"
+    >
+      HOME
+    </button>
+
+    <!-- 안내 문구 -->
+    <div class="hint">TAP 또는 SWIPE →</div>
+
+    <!-- 전체 슬라이드 컨테이너 -->
+    <main class="slides">
+      <!-- 1 ~ 6 반복 -->
+      <section class="slide" id="slide1">
+        <img src="images/1.jpg" alt="p1" />
+      </section>
+      <section class="slide"><img src="images/2.jpg" alt="p2" /></section>
+      <section class="slide"><img src="images/3.jpg" alt="p3" /></section>
+      <section class="slide"><img src="images/4.jpg" alt="p4" /></section>
+      <section class="slide"><img src="images/5.jpg" alt="p5" /></section>
+      <section class="slide"><img src="images/6.jpg" alt="p6" /></section>
+    </main>
+
+    <!-- ⬇︎  슬라이드 탭 시 다음으로 넘기기 -->
+    <script>
+      document.querySelectorAll(".slide").forEach((s, i, arr) => {
+        s.addEventListener("click", (e) => {
+          if (e.target.closest(".home-btn")) return; // 홈버튼 클릭 무시
+          const next = arr[i + 1];
+          if (next) {
+            next.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
