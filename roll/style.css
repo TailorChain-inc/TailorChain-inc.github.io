@@ -108,3 +108,34 @@ figcaption .small {
     transform: translate(-50%, 0);
   }
 }
+
+/* ─── 16:9 등 가로로 긴 화면 최적화 ───────────────────────── */
+/*       세로보다 가로가 넓은 환경에서만 적용                    */
+@media (min-aspect-ratio: 4/3) {
+
+  /* 세로형 이미지가 잘리지 않도록 전체가 보이게 */
+  .slide img {
+    width: auto;        /* 가로 비율을 자동으로 맞추고            */
+    height: 100%;       /* 세로를 화면에 딱 맞춤                  */
+    object-fit: contain;/* 검은 여백(레터박스)을 허용하며 전체 표시*/
+    object-position: center;
+    /* 필요하면 배경 역시 #000 로 두어 여백이 자연스럽게 보이도록 */
+    background-color: #000;
+  }
+
+  /* 캡션 위치·크기 조정 (여유 공간이 늘어나므로 약간 아래·작게) */
+  figcaption {
+    bottom: 6%;         /* 원래 12% → 더 아래로                   */
+    width: 60%;         /* 양옆 여백 확보                          */
+    font-size: 2.8rem;  /* 원래 3.5rem → 조금 축소                */
+  }
+  figcaption .small {
+    font-size: 1.6rem;  /* 함께 축소                               */
+  }
+
+  /* 전체화면 버튼·로고처럼 고정 요소도 약간 여백 늘리면 좋음 */
+  .fs-btn { bottom: 2rem; }
+  .logo   { top: 2rem; }
+}
+
+/* ─────────────────────────────────────────────────────────── */
