@@ -1,0 +1,28 @@
+{
+  "branches": [
+    {
+      "name": "main",
+      "commits": [
+        { "id": "c1", "message": "Initial commit", "parents": [] },
+        { "id": "c2", "message": "Project scaffold", "parents": ["c1"] },
+        { "id": "c3", "message": "Add feature A", "parents": ["c2"] }
+      ]
+    },
+    {
+      "name": "feature/login",
+      "commits": [
+        { "id": "c4", "message": "Login UI", "parents": ["c2"] },
+        { "id": "c5", "message": "Login backend", "parents": ["c4"] }
+      ]
+    }
+  ],
+  "merges": [
+    {
+      "id": "c6",
+      "message": "Merge feature/login",
+      "source": "feature/login",
+      "target": "main",
+      "parents": ["c3", "c5"]
+    }
+  ]
+}
