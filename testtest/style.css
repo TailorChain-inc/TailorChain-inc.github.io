@@ -1,0 +1,38 @@
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* LAYOUT */
+body       { font-family: system-ui, sans-serif; background: #f7f9fc; }
+header     { display: flex; justify-content: space-between; align-items: center;
+             padding: 12px 20px; background: #1e1e2f; color: #fff; }
+main       { overflow-x: auto; }
+svg        { background: #fff; }
+
+/* TOOLBAR */
+.toolbar button {
+  margin-right: 8px;
+  padding: 6px 14px;
+  background: #4c8bf5;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.toolbar button:last-child { margin-right: 0; }
+.toolbar button:hover      { opacity: .85; }
+
+/* COMMIT NODES & LINES */
+line.commit-line { stroke-width: 2; }
+g.commit circle  { fill: #fff; stroke-width: 3; transition: r .15s; }
+g.commit:hover circle { r: 14; }
+
+/* LOG AREA */
+#log {
+  border-top: 1px solid #ddd;
+  background: #fafbff;
+  padding: 10px 16px;
+  font-size: 14px;
+  max-height: 140px;
+  overflow-y: auto;
+}
