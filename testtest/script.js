@@ -1,10 +1,8 @@
-/* MetaTree UI – v2 (subs 배열 & rich meta 대응) */
-/* ------------------------------------------------------------ */
+/* MetaTree UI – v3: lane labels + commit captions */
 (async () => {
-  /* 1. LOAD & NORMALISE -------------------------------------- */
+  /* ---------- 1. LOAD + PREP ---------- */
   const raw = await fetch("mockdata.json").then((r) => r.json());
 
-  /* 1-1. 브랜치 순서 : main → main.subs 배열 순서 → 그 외 */
   const mainIdx = raw.branches.findIndex((b) => b.name === "main");
   const main = raw.branches[mainIdx];
   const orderedIdx = [mainIdx, ...(main.subs || [])];
@@ -13,10 +11,9 @@
     .filter((i) => !orderedIdx.includes(i));
   const branchSeq = [...orderedIdx, ...restIdx].map((i) => raw.branches[i]);
 
-  /* 1-2. 깊은 복사 + merges 삽입 */
   const data = {
     branches: branchSeq.map((b) => ({ ...b, commits: [...b.commits] })),
-    merges: raw.merges.map((m) => ({ ...m })) /* 따로도 보관 */,
+    merges: raw.merges.map((m) => ({ ...m })),
     nextId: 0,
     nextTime: 0,
   };
@@ -25,7 +22,6 @@
     if (t) t.commits.push({ ...m, merge: true });
   });
 
-  /* 1-3. nextId / nextTime 초기화 */
   const allNums = data.branches.flatMap((b) =>
     b.commits.map((c) => Number(c.id.slice(1)))
   );
@@ -33,10 +29,10 @@
   data.nextId = Math.max(...allNums) + 1;
   data.nextTime = Math.max(...allTimes) + 1;
 
-  /* 2. CONSTANTS --------------------------------------------- */
-  const X_GAP = 150,
+  /* ---------- 2. CONST ---------- */
+  const X_GAP = 160,
     Y_GAP = 110,
-    X_START = 90,
+    X_START = 100,
     Y_START = 70;
   const R = 12;
   const COLORS = [
@@ -48,35 +44,48 @@
     "#e91e63",
   ];
 
-  /* 3. DOM CACHE --------------------------------------------- */
+  /* ---------- 3. CACHE ---------- */
   const $svg = document.getElementById("treeCanvas");
+  const $labels = document.getElementById("branchLabels");
   const $log = document.getElementById("log");
-  const $btnC = document.getElementById("addCommit");
-  const $btnB = document.getElementById("addBranch");
-  const $btnM = document.getElementById("mergeBranch");
+  const $tip = (() => {
+    const d = document.createElement("div");
+    d.id = "metaTreeTooltip";
+    document.body.appendChild(d);
+    return d;
+  })();
+  document.getElementById("addCommit").onclick = addCommit;
+  document.getElementById("addBranch").onclick = addBranch;
+  document.getElementById("mergeBranch").onclick = mergeBranch;
 
-  /* 3-1. 커스텀 툴팁 */
-  const $tip = document.createElement("div");
-  $tip.id = "metaTreeTooltip";
-  document.body.appendChild($tip);
-
-  /* 4. RENDER ------------------------------------------------ */
+  /* ---------- 4. RENDER ---------- */
   function render() {
-    /* lane 매핑 */
+    /* lane map */
     const laneOf = {};
     data.branches.forEach((b, i) => (laneOf[b.name] = i));
 
-    /* 평면 커밋 목록 */
+    /* flat commit list */
     const commits = data.branches
       .flatMap((b) => b.commits.map((c) => ({ ...c, branch: b.name })))
       .sort((a, b) => a.time - b.time);
 
-    /* 캔버스 크기 */
+    /* svg size */
     $svg.innerHTML = "";
-    $svg.setAttribute("width", X_START + X_GAP * data.branches.length + 80);
-    $svg.setAttribute("height", Y_START + Y_GAP * commits.length + 80);
+    $svg.setAttribute("width", X_START + X_GAP * data.branches.length + 120);
+    $svg.setAttribute("height", Y_START + Y_GAP * commits.length + 100);
 
-    /* 좌표 사전 */
+    /* branch labels */
+    $labels.innerHTML = "";
+    data.branches.forEach((b) => {
+      const lane = laneOf[b.name];
+      const label = document.createElement("div");
+      label.className = "branch-label";
+      label.textContent = b.name;
+      label.style.left = `${X_START + lane * X_GAP}px`;
+      $labels.appendChild(label);
+    });
+
+    /* positions */
     const pos = {};
     commits.forEach((c, idx) => {
       pos[c.id] = {
@@ -85,7 +94,7 @@
       };
     });
 
-    /* 세로 lane 배경 */
+    /* lane lines */
     data.branches.forEach((b) => {
       const lane = laneOf[b.name],
         x = X_START + lane * X_GAP;
@@ -99,8 +108,8 @@
       });
     });
 
-    /* 부모-자식 라인 */
-    commits.forEach((c) => {
+    /* parent links */
+    commits.forEach((c) =>
       (c.parents || []).forEach((pid) => {
         if (!pos[pid]) return;
         drawLine(pos[pid].x, pos[pid].y, pos[c.id].x, pos[c.id].y, {
@@ -108,10 +117,10 @@
           "stroke-width": 2,
           class: "commit-line",
         });
-      });
-    });
+      })
+    );
 
-    /* 커밋 노드 */
+    /* nodes + captions */
     commits.forEach((c) => {
       const lane = laneOf[c.branch];
       const g = svgEl("g", { class: "commit" });
@@ -123,10 +132,17 @@
         fill: "#fff",
         "stroke-width": 3,
       });
+      const label = svgEl("text", {
+        x: pos[c.id].x + 18,
+        y: pos[c.id].y + 4,
+        class: "commit-label",
+      });
+      label.textContent = c.title || c.message;
       g.appendChild(circle);
+      g.appendChild(label);
       $svg.appendChild(g);
 
-      /* 툴팁/로그 */
+      /* tooltip & log */
       g.addEventListener("mouseover", (e) => {
         $tip.innerHTML = `<strong>${c.title || c.message}</strong><br>${
           c.content || c.message
@@ -135,9 +151,7 @@
         moveTip(e);
       });
       g.addEventListener("mousemove", moveTip);
-      g.addEventListener("mouseleave", () => {
-        $tip.style.display = "none";
-      });
+      g.addEventListener("mouseleave", () => ($tip.style.display = "none"));
       g.addEventListener("click", () => {
         $log.textContent = `[${c.id}] ${c.title || c.message}\nbranch: ${
           c.branch
@@ -146,7 +160,7 @@
     });
   }
 
-  /* helpers -------------------------------------------------- */
+  /* ---------- 5. HELPERS ---------- */
   const svgEl = (t, a) => {
     const e = document.createElementNS("http://www.w3.org/2000/svg", t);
     Object.entries(a).forEach(([k, v]) => e.setAttribute(k, v));
@@ -159,17 +173,17 @@
     $tip.style.top = `${e.pageY}px`;
   };
 
-  /* 5. DATA MUTATION ---------------------------------------- */
+  /* ---------- 6. MUTATIONS ---------- */
   const findBranch = (n) => data.branches.find((b) => b.name === n);
   const lastCommit = (b) => {
     const br = findBranch(b);
-    if (!br || !br.commits.length) return null;
-    return br.commits.reduce((a, c) => (a.time > c.time ? a : c));
+    return br && br.commits.length
+      ? br.commits.reduce((a, c) => (a.time > c.time ? a : c))
+      : null;
   };
   const newId = () => `c${data.nextId++}`;
   const newTime = () => data.nextTime++;
 
-  /* Add Commit */
   function addCommit() {
     const bName = prompt("Commit 브랜치?", "main");
     const br = findBranch(bName);
@@ -190,17 +204,14 @@
     render();
   }
 
-  /* Add Branch */
   function addBranch() {
     const base = prompt("분기 기준 브랜치?", "main");
     const baseC = lastCommit(base);
     if (!baseC) return alert("❌ 기준 브랜치 없음");
     const name = prompt("새 브랜치 이름?", "arc/new");
     if (!name || findBranch(name)) return alert("❌ 이름 오류/중복");
-    const metaTone = prompt("어투(톤)?", "서사");
     data.branches.push({
       name,
-      meta: { tone: metaTone },
       commits: [
         {
           id: newId(),
@@ -212,14 +223,12 @@
         },
       ],
     });
-    /* main.subs 업데이트 */
-    const main = findBranch("main");
-    if (main && Array.isArray(main.subs))
-      main.subs.push(data.branches.length - 1);
+    (findBranch("main").subs || (findBranch("main").subs = [])).push(
+      data.branches.length - 1
+    );
     render();
   }
 
-  /* Merge */
   function mergeBranch() {
     const src = prompt("Source 브랜치?");
     const tgt = prompt("Target 브랜치?", "main");
@@ -243,11 +252,6 @@
     render();
   }
 
-  /* 6. EVENTS ----------------------------------------------- */
-  $btnC.onclick = addCommit;
-  $btnB.onclick = addBranch;
-  $btnM.onclick = mergeBranch;
-
-  /* 7. FIRST DRAW ------------------------------------------- */
+  /* ---------- 7. INIT ---------- */
   render();
 })();
