@@ -52,28 +52,72 @@
   ],
   "merges": [
     {
-      "id": "c6",
-      "message": "Merge feature/login",
-      "source": "feature/login",
+      "id": "c11",
+      "title": "회귀편 마무리",
+      "content": "회귀 분기를 본류와 합류",
+      "message": "스토리 병합: 회귀편 완료",
+      "source": "arc/regressor",
       "target": "main",
       "parents": ["c3", "c5"],
-      "time": 10
+      "time": 10,
+      "episodesMerged": "4~5화",
+      "summary": "두 번의 회귀 끝에 변수(숨은 플레이어)를 찾아 시간 고리를 끊고 현재선으로 복귀한다.",
+      "impactOnMain": [
+        "주인공의 분석적 사고력 +1",
+        "재도전 페널티 제거 → 이후 위험을 감수할 자신감 형성"
+      ],
+      "unresolvedThreads": [
+        "‘숨은 플레이어’의 정체",
+        "회귀 중 목격한 붉은 균열 — 세계 붕괴 복선"
+      ],
+      "tonalShift": "절박 · 냉소 → 차분 · 자신감",
+      "writerNotes": "메인 타임라인 복귀 직후(6화 전) ‘시간 왜곡’ 잔향을 배경 디테일로 삽입하여 회귀 종료를 은근 암시."
     },
-    {
-      "id": "c11",
-      "message": "Merge feature/payment",
-      "source": "feature/payment",
-      "target": "main",
-      "parents": ["c6", "c8"],
-      "time": 11
-    },
+
     {
       "id": "c12",
-      "message": "Merge feature/notification",
-      "source": "feature/notification",
+      "title": "성좌편 마무리",
+      "content": "성좌 분기를 본류와 합류",
+      "message": "스토리 병합: 성좌편 완료",
+      "source": "arc/constellation",
       "target": "main",
-      "parents": ["c11", "c10"],
-      "time": 12
+      "parents": ["c11", "c8"],
+      "time": 11,
+      "episodesMerged": "6~7화",
+      "summary": "성좌 ‘광휘의 서편’과 정식 계약 체결 → 주인공이 우주적 권능을 얻고 지상으로 귀환한다.",
+      "impactOnMain": [
+        "신성 계열 능력 개방(빛, 공간)",
+        "계약 대가로 ‘별의 세금’(에너지 소모) 부과"
+      ],
+      "unresolvedThreads": [
+        "계약 시각에 나타난 검은 성좌",
+        "별무리 언약서의 빈 8번째 조항"
+      ],
+      "tonalShift": "장엄 · 신비 → 경외 · 책임감",
+      "writerNotes": "계약 장면 회상 플래시백을 9화 중간에 삽입하여 능력 획득 근거를 자연스럽게 노출."
+    },
+
+    {
+      "id": "c13",
+      "title": "대회편 마무리",
+      "content": "대회 분기를 본류와 합류",
+      "message": "스토리 병합: 대회편 완료",
+      "source": "arc/tournament",
+      "target": "main",
+      "parents": ["c12", "c10"],
+      "time": 12,
+      "episodesMerged": "8~9화",
+      "summary": "토너먼트 결승전에서 승리, ‘왕관의 조각’ 획득 → 본류 스토리의 1막 완결 선언.",
+      "impactOnMain": [
+        "명성과 영향력 급상승 → 이후 세력 간 견제 본격화",
+        "‘왕관의 조각’(키 아이템)으로 최종 장치 unlock 조건 충족"
+      ],
+      "unresolvedThreads": [
+        "패배한 라이벌의 복수 다짐",
+        "관중석 VIP 박수 속 익명의 후원자 등장"
+      ],
+      "tonalShift": "액션 · 고조 → 달콤한 승리 · 불안한 평화",
+      "writerNotes": "9화 클로징에서 관중 함성 속 ‘검은 성좌’ 실루엣을 재투입, 성좌·회귀 떡밥 연결."
     }
   ]
 }

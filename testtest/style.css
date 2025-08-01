@@ -1,11 +1,11 @@
-/* ───────── RESET ───────── */
+/* ───── RESET ───── */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ───────── LAYOUT ───────── */
+/* ───── LAYOUT ───── */
 body {
   font-family: system-ui, sans-serif;
   background: #f5f7fb;
@@ -24,25 +24,25 @@ main {
   background: #fff;
 }
 
-/* ───────── TOOLBAR ───────── */
+/* ───── TOOLBAR ───── */
+.toolbar {
+  display: flex;
+  gap: 8px;
+}
 .toolbar button {
-  margin-right: 8px;
-  padding: 6px 14px;
-  background: #4c8bf5;
+  padding: 6px 16px;
   border: 0;
   border-radius: 4px;
+  background: #4c8bf5;
   color: #fff;
   cursor: pointer;
   transition: opacity 0.15s;
-}
-.toolbar button:last-child {
-  margin-right: 0;
 }
 .toolbar button:hover {
   opacity: 0.85;
 }
 
-/* ───────── SVG ELEMENTS ───────── */
+/* ───── SVG ELEMENTS ───── */
 line.branch-back {
   stroke-width: 6;
   stroke-linecap: round;
@@ -60,12 +60,32 @@ g.commit:hover circle {
   r: 14;
 }
 
-/* ───────── LOG PANE ───────── */
-#log {
-  border-top: 1px solid #ddd;
+/* ───── CUSTOM TOOLTIP ───── */
+#metaTreeTooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.82);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.35;
+  max-width: 260px; /* 긴 설명도 두 줄로 줄바꿈 */
+  white-space: normal;
+  display: none;
+  z-index: 10000;
+  transform: translate(-50%, -140%);
+}
+
+/* ───── LOG PANE ───── */
+.log-pane {
+  border-top: 1px solid #d0d0e0;
   background: #fafbff;
-  padding: 10px 16px;
+  padding: 14px 20px;
   font-size: 14px;
-  max-height: 140px;
+  line-height: 1.45;
+  max-height: 180px;
   overflow-y: auto;
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+  word-break: keep-all;
 }
