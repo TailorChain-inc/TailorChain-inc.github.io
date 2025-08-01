@@ -1,14 +1,30 @@
-/* RESET */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ───────── RESET ───────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* LAYOUT */
-body       { font-family: system-ui, sans-serif; background: #f7f9fc; }
-header     { display: flex; justify-content: space-between; align-items: center;
-             padding: 12px 20px; background: #1e1e2f; color: #fff; }
-main       { overflow-x: auto; }
-svg        { background: #fff; }
+/* ───────── LAYOUT ───────── */
+body {
+  font-family: system-ui, sans-serif;
+  background: #f5f7fb;
+  color: #333;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #1e1e2f;
+  color: #fff;
+}
+main {
+  overflow: auto;
+  background: #fff;
+}
 
-/* TOOLBAR */
+/* ───────── TOOLBAR ───────── */
 .toolbar button {
   margin-right: 8px;
   padding: 6px 14px;
@@ -17,17 +33,34 @@ svg        { background: #fff; }
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-  transition: opacity .15s;
+  transition: opacity 0.15s;
 }
-.toolbar button:last-child { margin-right: 0; }
-.toolbar button:hover      { opacity: .85; }
+.toolbar button:last-child {
+  margin-right: 0;
+}
+.toolbar button:hover {
+  opacity: 0.85;
+}
 
-/* COMMIT NODES & LINES */
-line.commit-line { stroke-width: 2; }
-g.commit circle  { fill: #fff; stroke-width: 3; transition: r .15s; }
-g.commit:hover circle { r: 14; }
+/* ───────── SVG ELEMENTS ───────── */
+line.branch-back {
+  stroke-width: 6;
+  stroke-linecap: round;
+  opacity: 0.15;
+}
+line.commit-line {
+  stroke-width: 2;
+}
+g.commit circle {
+  fill: #fff;
+  stroke-width: 3;
+  transition: r 0.15s;
+}
+g.commit:hover circle {
+  r: 14;
+}
 
-/* LOG AREA */
+/* ───────── LOG PANE ───────── */
 #log {
   border-top: 1px solid #ddd;
   background: #fafbff;

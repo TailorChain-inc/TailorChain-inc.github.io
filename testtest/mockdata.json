@@ -3,16 +3,50 @@
     {
       "name": "main",
       "commits": [
-        { "id": "c1", "message": "Initial commit", "parents": [] },
-        { "id": "c2", "message": "Project scaffold", "parents": ["c1"] },
-        { "id": "c3", "message": "Add feature A", "parents": ["c2"] }
+        { "id": "c1", "message": "Initial commit", "parents": [], "time": 1 },
+        {
+          "id": "c2",
+          "message": "Project scaffold",
+          "parents": ["c1"],
+          "time": 2
+        },
+        { "id": "c3", "message": "Add feature A", "parents": ["c2"], "time": 3 }
       ]
     },
     {
       "name": "feature/login",
       "commits": [
-        { "id": "c4", "message": "Login UI", "parents": ["c2"] },
-        { "id": "c5", "message": "Login backend", "parents": ["c4"] }
+        { "id": "c4", "message": "Login UI", "parents": ["c2"], "time": 4 },
+        { "id": "c5", "message": "Login backend", "parents": ["c4"], "time": 5 }
+      ]
+    },
+    {
+      "name": "feature/payment",
+      "commits": [
+        { "id": "c7", "message": "Payment UI", "parents": ["c3"], "time": 6 },
+        {
+          "id": "c8",
+          "message": "Payment handler",
+          "parents": ["c7"],
+          "time": 7
+        }
+      ]
+    },
+    {
+      "name": "feature/notification",
+      "commits": [
+        {
+          "id": "c9",
+          "message": "Notification svc",
+          "parents": ["c3"],
+          "time": 8
+        },
+        {
+          "id": "c10",
+          "message": "Notification UI",
+          "parents": ["c9"],
+          "time": 9
+        }
       ]
     }
   ],
@@ -22,7 +56,24 @@
       "message": "Merge feature/login",
       "source": "feature/login",
       "target": "main",
-      "parents": ["c3", "c5"]
+      "parents": ["c3", "c5"],
+      "time": 10
+    },
+    {
+      "id": "c11",
+      "message": "Merge feature/payment",
+      "source": "feature/payment",
+      "target": "main",
+      "parents": ["c6", "c8"],
+      "time": 11
+    },
+    {
+      "id": "c12",
+      "message": "Merge feature/notification",
+      "source": "feature/notification",
+      "target": "main",
+      "parents": ["c11", "c10"],
+      "time": 12
     }
   ]
 }
