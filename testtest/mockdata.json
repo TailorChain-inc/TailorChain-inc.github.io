@@ -2,64 +2,141 @@
   "branches": [
     {
       "name": "main",
+      "subs": [1, 2, 3],
+      "meta": {
+        "episodes": { "from": 1, "to": 3 },
+        "tone": "담담한 1인칭 서술",
+        "mood": "점층적 긴장",
+        "concept": "주인공 각성 서막",
+        "protagonistPersonality": "평범 → 각성 중"
+      },
       "commits": [
-        { "id": "c1", "message": "Initial commit", "parents": [], "time": 1 },
+        {
+          "id": "c1",
+          "title": "1화",
+          "content": "평범한 독자에게 찾아온 운명적인 첫 장면",
+          "message": "1화: 새로운 시작",
+          "parents": [],
+          "time": 1
+        },
         {
           "id": "c2",
-          "message": "Project scaffold",
+          "title": "2화",
+          "content": "세상에 숨겨진 ‘플랫폼’이 베일을 벗다",
+          "message": "2화: 플랫폼 공개",
           "parents": ["c1"],
           "time": 2
         },
-        { "id": "c3", "message": "Add feature A", "parents": ["c2"], "time": 3 }
-      ]
-    },
-    {
-      "name": "feature/login",
-      "commits": [
-        { "id": "c4", "message": "Login UI", "parents": ["c2"], "time": 4 },
-        { "id": "c5", "message": "Login backend", "parents": ["c4"], "time": 5 }
-      ]
-    },
-    {
-      "name": "feature/payment",
-      "commits": [
-        { "id": "c7", "message": "Payment UI", "parents": ["c3"], "time": 6 },
         {
-          "id": "c8",
-          "message": "Payment handler",
-          "parents": ["c7"],
-          "time": 7
+          "id": "c3",
+          "title": "3화",
+          "content": "전지적 독자 시점을 각성하다",
+          "message": "3화: 각성",
+          "parents": ["c2"],
+          "time": 3
         }
       ]
     },
+
     {
-      "name": "feature/notification",
+      "name": "arc/regressor",
+      "meta": {
+        "episodes": { "from": 4, "to": 5 },
+        "tone": "냉소적 1인칭 회고",
+        "mood": "긴장과 절박",
+        "concept": "회귀·리셋 분기",
+        "protagonistPersonality": "집요·분석적"
+      },
       "commits": [
         {
-          "id": "c9",
-          "message": "Notification svc",
-          "parents": ["c3"],
-          "time": 8
+          "id": "c4",
+          "title": "4화 (회귀편 1)",
+          "content": "첫 번째 회귀 — 실패의 시작",
+          "message": "회귀분기: 첫 회귀",
+          "parents": ["c2"],
+          "time": 4
         },
         {
+          "id": "c5",
+          "title": "5화 (회귀편 2)",
+          "content": "두 번째 시도 — 변수의 등장",
+          "message": "회귀분기: 두 번째 회귀",
+          "parents": ["c4"],
+          "time": 5
+        }
+      ]
+    },
+
+    {
+      "name": "arc/constellation",
+      "meta": {
+        "episodes": { "from": 6, "to": 7 },
+        "tone": "웅장한 3인칭 묘사",
+        "mood": "신비·장엄",
+        "concept": "성좌(컨스터레이션) 계약",
+        "protagonistPersonality": "영적·수용적"
+      },
+      "commits": [
+        {
+          "id": "c7",
+          "title": "6화 (성좌편 1)",
+          "content": "머나먼 성좌의 속삭임",
+          "message": "성좌분기: 속삭임",
+          "parents": ["c3"],
+          "time": 7
+        },
+        {
+          "id": "c8",
+          "title": "7화 (성좌편 2)",
+          "content": "계약, 그리고 새로운 힘",
+          "message": "성좌분기: 계약",
+          "parents": ["c7"],
+          "time": 8
+        }
+      ]
+    },
+
+    {
+      "name": "arc/tournament",
+      "meta": {
+        "episodes": { "from": 8, "to": 9 },
+        "tone": "경쾌한 현재형",
+        "mood": "액션·고조",
+        "concept": "토너먼트 결전",
+        "protagonistPersonality": "승부욕·자신감"
+      },
+      "commits": [
+        {
           "id": "c10",
-          "message": "Notification UI",
-          "parents": ["c9"],
-          "time": 9
+          "title": "8화 (대회편 1)",
+          "content": "예선 돌입 — 치열한 서막",
+          "message": "대회분기: 예선",
+          "parents": ["c3"],
+          "time": 10
+        },
+        {
+          "id": "c11",
+          "title": "9화 (대회편 2)",
+          "content": "결승 진출 — 운명과 마주하다",
+          "message": "대회분기: 결승",
+          "parents": ["c10"],
+          "time": 11
         }
       ]
     }
   ],
+
   "merges": [
     {
-      "id": "c11",
+      "id": "c6",
       "title": "회귀편 마무리",
       "content": "회귀 분기를 본류와 합류",
       "message": "스토리 병합: 회귀편 완료",
       "source": "arc/regressor",
       "target": "main",
       "parents": ["c3", "c5"],
-      "time": 10,
+      "time": 6,
+
       "episodesMerged": "4~5화",
       "summary": "두 번의 회귀 끝에 변수(숨은 플레이어)를 찾아 시간 고리를 끊고 현재선으로 복귀한다.",
       "impactOnMain": [
@@ -75,14 +152,15 @@
     },
 
     {
-      "id": "c12",
+      "id": "c9",
       "title": "성좌편 마무리",
       "content": "성좌 분기를 본류와 합류",
       "message": "스토리 병합: 성좌편 완료",
       "source": "arc/constellation",
       "target": "main",
-      "parents": ["c11", "c8"],
-      "time": 11,
+      "parents": ["c6", "c8"],
+      "time": 9,
+
       "episodesMerged": "6~7화",
       "summary": "성좌 ‘광휘의 서편’과 정식 계약 체결 → 주인공이 우주적 권능을 얻고 지상으로 귀환한다.",
       "impactOnMain": [
@@ -98,19 +176,20 @@
     },
 
     {
-      "id": "c13",
+      "id": "c12",
       "title": "대회편 마무리",
       "content": "대회 분기를 본류와 합류",
       "message": "스토리 병합: 대회편 완료",
       "source": "arc/tournament",
       "target": "main",
-      "parents": ["c12", "c10"],
+      "parents": ["c9", "c11"],
       "time": 12,
+
       "episodesMerged": "8~9화",
       "summary": "토너먼트 결승전에서 승리, ‘왕관의 조각’ 획득 → 본류 스토리의 1막 완결 선언.",
       "impactOnMain": [
         "명성과 영향력 급상승 → 이후 세력 간 견제 본격화",
-        "‘왕관의 조각’(키 아이템)으로 최종 장치 unlock 조건 충족"
+        "‘왕관의 조작’(키 아이템)으로 최종 장치 unlock 조건 충족"
       ],
       "unresolvedThreads": [
         "패배한 라이벌의 복수 다짐",
