@@ -1,15 +1,15 @@
-/* ───── RESET ───── */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ───── LAYOUT ───── */
+/* LAYOUT */
 body {
   font-family: system-ui, sans-serif;
   background: #f5f7fb;
-  color: #333;
+  color: #222;
 }
 header {
   display: flex;
@@ -19,39 +19,107 @@ header {
   background: #1e1e2f;
   color: #fff;
 }
-main {
-  overflow: auto;
-  background: #fff;
-}
-
-/* ───── TOOLBAR ───── */
 .toolbar {
   display: flex;
   gap: 8px;
 }
 .toolbar button {
-  padding: 6px 16px;
+  padding: 6px 14px;
   border: 0;
-  border-radius: 4px;
+  border-radius: 6px;
   background: #4c8bf5;
   color: #fff;
   cursor: pointer;
-  transition: opacity 0.15s;
 }
 .toolbar button:hover {
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
-/* ───── TREE WRAPPER ───── */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(520px, 1fr) 380px;
+  gap: 16px;
+  align-items: start;
+}
+.treeCol {
+  background: #fff;
+}
 #treeWrapper {
   position: relative;
   min-height: 800px;
 }
 
-/* 브랜치 레인 이름 */
+/* RIGHT PANEL */
+.panel {
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  max-height: calc(100vh - 64px);
+  overflow: auto;
+}
+.panel h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.card {
+  background: #fff;
+  border: 1px solid #e7e9f2;
+  border-radius: 12px;
+  padding: 14px 14px 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.card h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.form-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 8px 0;
+}
+.form-row label {
+  width: 95px;
+  font-size: 12px;
+  color: #555;
+}
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #d9dce7;
+  border-radius: 8px;
+  background: #fff;
+}
+.primary {
+  margin-top: 6px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #111827;
+  color: #fff;
+  cursor: pointer;
+}
+.primary:hover {
+  opacity: 0.92;
+}
+.hint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #666;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* BRANCH LABELS */
 #branchLabels {
   position: absolute;
-  top: 8px;
+  top: 6px;
   left: 0;
   right: 0;
   pointer-events: none;
@@ -59,13 +127,29 @@ main {
 .branch-label {
   position: absolute;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: #666;
   transform: translateX(-50%);
   text-shadow: 0 0 4px #fff;
 }
 
-/* ───── SVG ELEMENTS ───── */
+/* segment pills near label */
+.segment-pill {
+  position: absolute;
+  top: 24px;
+  transform: translateX(-50%);
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  border: 1px solid #e0e4f2;
+  background: #f7f8ff;
+  color: #334;
+}
+.segment-pill + .segment-pill {
+  margin-top: 6px;
+}
+
+/* SVG */
 line.branch-back {
   stroke-width: 6;
   stroke-linecap: round;
@@ -88,14 +172,14 @@ text.commit-label {
   user-select: none;
 }
 
-/* ───── CUSTOM TOOLTIP ───── */
+/* Tooltip */
 #metaTreeTooltip {
   position: absolute;
   pointer-events: none;
   background: rgba(0, 0, 0, 0.82);
   color: #fff;
   padding: 6px 10px;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 13px;
   line-height: 1.35;
   max-width: 260px;
@@ -105,7 +189,7 @@ text.commit-label {
   transform: translate(-50%, -140%);
 }
 
-/* ───── LOG PANE ───── */
+/* Log */
 .log-pane {
   border-top: 1px solid #d0d0e0;
   background: #fafbff;
@@ -116,4 +200,15 @@ text.commit-label {
   overflow-y: auto;
   white-space: pre-wrap;
   word-break: keep-all;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .panel {
+    position: relative;
+    max-height: none;
+  }
 }

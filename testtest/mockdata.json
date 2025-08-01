@@ -2,201 +2,154 @@
   "branches": [
     {
       "name": "main",
-      "subs": [1, 2, 3],
+      "subs": [1, 2],
       "meta": {
-        "episodes": { "from": 1, "to": 3 },
-        "tone": "담담한 1인칭 서술",
-        "mood": "점층적 긴장",
-        "concept": "주인공 각성 서막",
-        "protagonistPersonality": "평범 → 각성 중"
+        "segments": [
+          {
+            "from": 1,
+            "to": 3,
+            "flow": "사건 도입·각성",
+            "concept": "일상 → 시스템"
+          },
+          { "from": 4, "to": 6, "flow": "회귀 수습", "concept": "루프 종료" },
+          {
+            "from": 7,
+            "to": 12,
+            "flow": "새 세력 등장",
+            "concept": "성좌·대회"
+          }
+        ]
       },
       "commits": [
         {
           "id": "c1",
           "title": "1화",
-          "content": "평범한 독자에게 찾아온 운명적인 첫 장면",
-          "message": "1화: 새로운 시작",
+          "content": "평범한 독자의 일상",
+          "message": "1화: 평범한 독자",
           "parents": [],
           "time": 1
         },
         {
           "id": "c2",
           "title": "2화",
-          "content": "세상에 숨겨진 ‘플랫폼’이 베일을 벗다",
-          "message": "2화: 플랫폼 공개",
+          "content": "시스템의 첫 등장",
+          "message": "2화: 시스템 등장",
           "parents": ["c1"],
           "time": 2
         },
         {
           "id": "c3",
           "title": "3화",
-          "content": "전지적 독자 시점을 각성하다",
-          "message": "3화: 각성",
+          "content": "초기 위기 고조",
+          "message": "3화: 위기 고조",
           "parents": ["c2"],
           "time": 3
+        },
+        {
+          "id": "c7",
+          "title": "4화",
+          "content": "회귀 충격의 여파",
+          "message": "4화: 회귀 여파",
+          "parents": ["c6"],
+          "time": 7
+        },
+        {
+          "id": "c8",
+          "title": "5화",
+          "content": "성좌의 속삭임 시작",
+          "message": "5화: 성좌 속삭임",
+          "parents": ["c7"],
+          "time": 8
+        },
+        {
+          "id": "c12",
+          "title": "6화",
+          "content": "토너먼트 예고",
+          "message": "6화: 대회 예고",
+          "parents": ["c11"],
+          "time": 12
         }
       ]
     },
-
     {
       "name": "arc/regressor",
       "meta": {
-        "episodes": { "from": 4, "to": 5 },
-        "tone": "냉소적 1인칭 회고",
-        "mood": "긴장과 절박",
-        "concept": "회귀·리셋 분기",
-        "protagonistPersonality": "집요·분석적"
+        "segments": [
+          {
+            "from": 1,
+            "to": 4,
+            "flow": "시간 루프 미스터리",
+            "concept": "회귀 인지"
+          },
+          { "from": 5, "to": 6, "flow": "변수 추적", "concept": "루프 해제" }
+        ]
       },
       "commits": [
         {
           "id": "c4",
-          "title": "4화 (회귀편 1)",
-          "content": "첫 번째 회귀 — 실패의 시작",
-          "message": "회귀분기: 첫 회귀",
+          "title": "회귀 1",
+          "content": "첫 회귀·실패",
+          "message": "회귀편 1",
           "parents": ["c2"],
           "time": 4
         },
         {
           "id": "c5",
-          "title": "5화 (회귀편 2)",
-          "content": "두 번째 시도 — 변수의 등장",
-          "message": "회귀분기: 두 번째 회귀",
+          "title": "회귀 2",
+          "content": "변수 발견",
+          "message": "회귀편 2",
           "parents": ["c4"],
           "time": 5
         }
       ]
     },
-
     {
       "name": "arc/constellation",
       "meta": {
-        "episodes": { "from": 6, "to": 7 },
-        "tone": "웅장한 3인칭 묘사",
-        "mood": "신비·장엄",
-        "concept": "성좌(컨스터레이션) 계약",
-        "protagonistPersonality": "영적·수용적"
+        "segments": [
+          { "from": 5, "to": 8, "flow": "신비·장엄", "concept": "성좌 계약" }
+        ]
       },
       "commits": [
         {
-          "id": "c7",
-          "title": "6화 (성좌편 1)",
-          "content": "머나먼 성좌의 속삭임",
-          "message": "성좌분기: 속삭임",
-          "parents": ["c3"],
-          "time": 7
-        },
-        {
-          "id": "c8",
-          "title": "7화 (성좌편 2)",
-          "content": "계약, 그리고 새로운 힘",
-          "message": "성좌분기: 계약",
+          "id": "c9",
+          "title": "성좌 1",
+          "content": "성좌의 호출",
+          "message": "성좌편 1",
           "parents": ["c7"],
-          "time": 8
-        }
-      ]
-    },
-
-    {
-      "name": "arc/tournament",
-      "meta": {
-        "episodes": { "from": 8, "to": 9 },
-        "tone": "경쾌한 현재형",
-        "mood": "액션·고조",
-        "concept": "토너먼트 결전",
-        "protagonistPersonality": "승부욕·자신감"
-      },
-      "commits": [
+          "time": 9
+        },
         {
           "id": "c10",
-          "title": "8화 (대회편 1)",
-          "content": "예선 돌입 — 치열한 서막",
-          "message": "대회분기: 예선",
-          "parents": ["c3"],
+          "title": "성좌 2",
+          "content": "계약 체결",
+          "message": "성좌편 2",
+          "parents": ["c9"],
           "time": 10
-        },
-        {
-          "id": "c11",
-          "title": "9화 (대회편 2)",
-          "content": "결승 진출 — 운명과 마주하다",
-          "message": "대회분기: 결승",
-          "parents": ["c10"],
-          "time": 11
         }
       ]
     }
   ],
-
   "merges": [
     {
       "id": "c6",
       "title": "회귀편 마무리",
-      "content": "회귀 분기를 본류와 합류",
-      "message": "스토리 병합: 회귀편 완료",
+      "content": "회귀 루프 종료 후 본류 합류",
+      "message": "Merge arc/regressor",
       "source": "arc/regressor",
       "target": "main",
       "parents": ["c3", "c5"],
-      "time": 6,
-
-      "episodesMerged": "4~5화",
-      "summary": "두 번의 회귀 끝에 변수(숨은 플레이어)를 찾아 시간 고리를 끊고 현재선으로 복귀한다.",
-      "impactOnMain": [
-        "주인공의 분석적 사고력 +1",
-        "재도전 페널티 제거 → 이후 위험을 감수할 자신감 형성"
-      ],
-      "unresolvedThreads": [
-        "‘숨은 플레이어’의 정체",
-        "회귀 중 목격한 붉은 균열 — 세계 붕괴 복선"
-      ],
-      "tonalShift": "절박 · 냉소 → 차분 · 자신감",
-      "writerNotes": "메인 타임라인 복귀 직후(6화 전) ‘시간 왜곡’ 잔향을 배경 디테일로 삽입하여 회귀 종료를 은근 암시."
+      "time": 6
     },
-
     {
-      "id": "c9",
+      "id": "c11",
       "title": "성좌편 마무리",
-      "content": "성좌 분기를 본류와 합류",
-      "message": "스토리 병합: 성좌편 완료",
+      "content": "성좌 계약을 완료하고 본류 합류",
+      "message": "Merge arc/constellation",
       "source": "arc/constellation",
       "target": "main",
-      "parents": ["c6", "c8"],
-      "time": 9,
-
-      "episodesMerged": "6~7화",
-      "summary": "성좌 ‘광휘의 서편’과 정식 계약 체결 → 주인공이 우주적 권능을 얻고 지상으로 귀환한다.",
-      "impactOnMain": [
-        "신성 계열 능력 개방(빛, 공간)",
-        "계약 대가로 ‘별의 세금’(에너지 소모) 부과"
-      ],
-      "unresolvedThreads": [
-        "계약 시각에 나타난 검은 성좌",
-        "별무리 언약서의 빈 8번째 조항"
-      ],
-      "tonalShift": "장엄 · 신비 → 경외 · 책임감",
-      "writerNotes": "계약 장면 회상 플래시백을 9화 중간에 삽입하여 능력 획득 근거를 자연스럽게 노출."
-    },
-
-    {
-      "id": "c12",
-      "title": "대회편 마무리",
-      "content": "대회 분기를 본류와 합류",
-      "message": "스토리 병합: 대회편 완료",
-      "source": "arc/tournament",
-      "target": "main",
-      "parents": ["c9", "c11"],
-      "time": 12,
-
-      "episodesMerged": "8~9화",
-      "summary": "토너먼트 결승전에서 승리, ‘왕관의 조각’ 획득 → 본류 스토리의 1막 완결 선언.",
-      "impactOnMain": [
-        "명성과 영향력 급상승 → 이후 세력 간 견제 본격화",
-        "‘왕관의 조작’(키 아이템)으로 최종 장치 unlock 조건 충족"
-      ],
-      "unresolvedThreads": [
-        "패배한 라이벌의 복수 다짐",
-        "관중석 VIP 박수 속 익명의 후원자 등장"
-      ],
-      "tonalShift": "액션 · 고조 → 달콤한 승리 · 불안한 평화",
-      "writerNotes": "9화 클로징에서 관중 함성 속 ‘검은 성좌’ 실루엣을 재투입, 성좌·회귀 떡밥 연결."
+      "parents": ["c8", "c10"],
+      "time": 11
     }
   ]
 }

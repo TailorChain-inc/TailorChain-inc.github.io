@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,19 +9,93 @@
   <body>
     <header>
       <h1>MetaTree UI</h1>
-
       <nav class="toolbar">
         <button id="addCommit">Add Commit</button>
-        <button id="addBranch">Add Branch</button>
-        <button id="mergeBranch">Merge</button>
+        <button id="addBranchHeader">Add Branch (Panel)</button>
+        <button id="mergeBranchHeader">Merge (Panel)</button>
       </nav>
     </header>
 
-    <main>
-      <div id="treeWrapper">
-        <div id="branchLabels"></div>
-        <svg id="treeCanvas" width="100%" height="800"></svg>
-      </div>
+    <main class="layout">
+      <!-- LEFT: Tree -->
+      <section class="treeCol">
+        <div id="treeWrapper">
+          <div id="branchLabels"></div>
+          <svg id="treeCanvas" width="100%" height="800"></svg>
+        </div>
+      </section>
+
+      <!-- RIGHT: Story Controls -->
+      <aside class="panel">
+        <h2>Story Controls</h2>
+
+        <section class="card">
+          <h3>브랜치 생성</h3>
+          <div class="form-row">
+            <label>기준(Base)</label>
+            <select id="branchBaseSelect"></select>
+          </div>
+          <div class="form-row">
+            <label>새 브랜치 이름</label>
+            <input id="branchNameInput" placeholder="arc/new" />
+          </div>
+          <div class="form-row">
+            <label>흐름(Flow)</label>
+            <select id="branchFlowSelect"></select>
+          </div>
+          <div class="form-row">
+            <label>컨셉(Concept)</label>
+            <select id="branchConceptSelect"></select>
+          </div>
+          <button id="createBranchBtn" class="primary">브랜치 생성</button>
+          <p class="hint">※ 서브 브랜치는 최대 2개까지 허용</p>
+        </section>
+
+        <section class="card">
+          <h3>브랜치 병합</h3>
+          <div class="form-row">
+            <label>Source</label>
+            <select id="mergeSourceSelect"></select>
+          </div>
+          <div class="form-row">
+            <label>Target</label>
+            <input value="main" disabled />
+          </div>
+          <div class="form-row">
+            <label>병합 의도(Outcome)</label>
+            <select id="mergeOutcomeSelect"></select>
+          </div>
+          <button id="mergeBtn" class="primary">병합</button>
+        </section>
+
+        <section class="card">
+          <h3>브랜치 구간 메타</h3>
+          <div class="form-row">
+            <label>브랜치</label>
+            <select id="segmentBranchSelect"></select>
+          </div>
+          <div class="grid2">
+            <div class="form-row">
+              <label>시작 화</label>
+              <input id="segmentFrom" type="number" min="1" placeholder="1" />
+            </div>
+            <div class="form-row">
+              <label>끝 화</label>
+              <input id="segmentTo" type="number" min="1" placeholder="4" />
+            </div>
+          </div>
+          <div class="form-row">
+            <label>흐름(Flow)</label>
+            <select id="segmentFlowSelect"></select>
+          </div>
+          <div class="form-row">
+            <label>컨셉(Concept)</label>
+            <select id="segmentConceptSelect"></select>
+          </div>
+          <button id="addSegmentBtn">구간 추가</button>
+          <ul id="segmentList" class="pill-list"></ul>
+        </section>
+      </aside>
     </main>
 
     <aside id="log" class="log-pane"></aside>
